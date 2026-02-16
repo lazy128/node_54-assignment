@@ -31,7 +31,7 @@ CREATE TABLE if not exists foods (
     isDeleted TINYINT(1) NOT NULL DEFAULT 0,
     deletedAt TIMESTAMP NULL DEFAULT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT Current_timestamp,
-    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Thêm dấu phẩy ở đây
+    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (types_id) REFERENCES food_types(id)
 );
 
@@ -240,4 +240,52 @@ INSERT into rate_res (userID, resID, amount, date_rate) VALUES
 (8, 9, 3, '2024-01-22 19:15:00'),
 (9, 8, 4, '2024-01-23 20:05:00'),
 (10, 10, 5, '2024-01-24 21:40:00')
+
+
+--5 nguoi like nhieu cuu hang nhieu nhat
+SELECT 
+    users.id, 
+    users.full_name, 
+    users.email, 
+    COUNT(like_res.resID) AS total_likes
+FROM users
+JOIN like_res ON users.id = like_res.userID
+GROUP BY users.id
+ORDER BY total_likes DESC
+LIMIT 5;
+
+--tim kiem 2 cua hang duoc like nhieu nhat
+SELECT 
+    restaurants.res_name, 
+    COUNT(like_res.resID) AS total_likes
+FROM restaurants
+JOIN like_res ON restaurants.id = like_res.resID
+GROUP BY restaurants.id
+ORDER BY total_likes DESC
+LIMIT 2;
+
+
+--tim nguoi dat hang nhieu nhat
+SELECT 
+    users.id, 
+    users.full_name, 
+    users.email, 
+    COUNT(orders.id) AS total_orders
+FROM users
+JOIN orders ON users.id = orders.userID
+GROUP BY users.id
+ORDER BY total_orders DESC
+LIMIT 1;
+--tim kiem nguoi khong hoat dong
+SELECT 
+    users.id, 
+    users.full_name, 
+    users.email
+FROM users
+LEFT JOIN orders ON users.id = orders.userID
+LEFT JOIN like_res ON users.id = like_res.userID
+LEFT JOIN rate_res ON users.id = rate_res.userID
+WHERE orders.userID IS NULL 
+  AND like_res.userID IS NULL 
+  AND rate_res.userID IS NULL;
 
