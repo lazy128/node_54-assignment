@@ -20,7 +20,7 @@ const app = express();
 //     res.setHeader("access-control-allow-origin", "*")
 //     next();
 // });
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:3000"],credentials: true}));
+app.use(cors({ origin: ["http://localhost:5173", "http://localhost:3000","https://my-picture-fe.vercel.app"],credentials: true}));
 
 // để lấy được body (đảm bảo trước "/api")
 app.use(express.json());
