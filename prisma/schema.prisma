@@ -7,132 +7,75 @@ datasource db {
   provider = "mysql"
 }
 
-model food_subs {
-  id        Int       @id @default(autoincrement())
-  sub_name  String?   @db.VarChar(255)
-  sub_price Float?    @db.Float
-  foodID    Int?
-  deletedBy Int       @default(0)
-  isDeleted Boolean   @default(false)
-  deletedAt DateTime? @db.Timestamp(0)
-  createdAt DateTime  @default(now()) @db.Timestamp(0)
-  updatedAt DateTime  @default(now()) @db.Timestamp(0)
-  foods     foods?    @relation(fields: [foodID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "food_subs_ibfk_1")
-
-  @@index([foodID], map: "foodID")
+model nguoi_dung {
+  nguoi_dung_id Int         @id @default(autoincrement())
+  email         String      @unique(map: "email") @db.VarChar(255)
+  mat_khau      String?     @db.VarChar(255)
+  ho_ten        String?     @db.VarChar(255)
+  tuoi          Int?
+  anh_dai_dien  String?     @db.Text
+  deletedBy     Int         @default(0)
+  isDeleted     Boolean     @default(false)
+  deletedAt     DateTime?   @db.Timestamp(0)
+  createdAt     DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime    @default(now()) @db.Timestamp(0)
+  binh_luan     binh_luan[]
+  hinh_anh      hinh_anh[]
+  luu_anh       luu_anh[]
 }
 
-model food_types {
-  id         Int       @id @default(autoincrement())
-  types_name String?   @db.VarChar(255)
-  deletedBy  Int       @default(0)
-  isDeleted  Boolean   @default(false)
-  deletedAt  DateTime? @db.Timestamp(0)
-  createdAt  DateTime  @default(now()) @db.Timestamp(0)
-  updatedAt  DateTime  @default(now()) @db.Timestamp(0)
-  foods      foods[]
+model hinh_anh {
+  hinh_id              Int         @id @default(autoincrement())
+  ten_hinh             String?     @db.VarChar(255)
+  duong_dan            String?     @db.VarChar(255)
+  mo_ta                String?     @db.VarChar(500)
+  nguoi_dung_id        Int?
+  deletedBy            Int         @default(0)
+  isDeleted            Boolean     @default(false)
+  deletedAt            DateTime?   @db.Timestamp(0)
+  createdAt            DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt            DateTime    @default(now()) @db.Timestamp(0)
+  cloudinary_public_id String?     @db.VarChar(255)
+  binh_luan            binh_luan[]
+  nguoi_dung           nguoi_dung? @relation(fields: [nguoi_dung_id], references: [nguoi_dung_id], onDelete: NoAction, onUpdate: NoAction, map: "hinh_anh_ibfk_1")
+  luu_anh              luu_anh[]
+
+  @@index([nguoi_dung_id], map: "nguoi_dung_id")
 }
 
-model foods {
-  id           Int         @id @default(autoincrement())
-  food_name    String?     @db.VarChar(255)
-  imageUrl     String?     @db.VarChar(255)
-  price        Float?      @db.Float
-  descriptions String?     @default("Still no information") @db.VarChar(255)
-  deletedBy    Int         @default(0)
-  types_id     Int?
-  isDeleted    Boolean     @default(false)
-  deletedAt    DateTime?   @db.Timestamp(0)
-  createdAt    DateTime    @default(now()) @db.Timestamp(0)
-  updatedAt    DateTime    @default(now()) @db.Timestamp(0)
-  food_subs    food_subs[]
-  food_types   food_types? @relation(fields: [types_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "foods_ibfk_1")
-  orders       orders[]
+model binh_luan {
+  binh_luan_id   Int         @id @default(autoincrement())
+  nguoi_dung_id  Int?
+  hinh_id        Int?
+  noi_dung       String?     @db.VarChar(500)
+  ngay_binh_luan DateTime    @default(now()) @db.Timestamp(0)
+  deletedBy      Int         @default(0)
+  isDeleted      Boolean     @default(false)
+  deletedAt      DateTime?   @db.Timestamp(0)
+  createdAt      DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime    @default(now()) @db.Timestamp(0)
+  nguoi_dung     nguoi_dung? @relation(fields: [nguoi_dung_id], references: [nguoi_dung_id], onDelete: NoAction, onUpdate: NoAction, map: "binh_luan_ibfk_1")
+  hinh_anh       hinh_anh?   @relation(fields: [hinh_id], references: [hinh_id], onDelete: NoAction, onUpdate: NoAction, map: "binh_luan_ibfk_2")
 
-  @@index([types_id], map: "types_id")
+  @@index([nguoi_dung_id], map: "nguoi_dung_id")
+  @@index([hinh_id], map: "hinh_id")
 }
 
-model like_res {
-  id          Int          @id @default(autoincrement())
-  userID      Int?
-  resID       Int?
-  deletedBy   Int          @default(0)
-  isDeleted   Boolean      @default(false)
-  deletedAt   DateTime?    @db.Timestamp(0)
-  createdAt   DateTime     @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime     @default(now()) @db.Timestamp(0)
-  isLike      Boolean?     @default(true)
-  isDislike   Boolean?     @default(false)
-  users       users?       @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "like_res_ibfk_1")
-  restaurants restaurants? @relation(fields: [resID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "like_res_ibfk_2")
+model luu_anh {
+  nguoi_dung_id Int
+  hinh_id       Int
+  createdAt     DateTime   @default(now()) @db.Timestamp(0)
+  nguoi_dung    nguoi_dung @relation(fields: [nguoi_dung_id], references: [nguoi_dung_id], onDelete: NoAction, onUpdate: NoAction, map: "luu_anh_ibfk_1")
+  hinh_anh      hinh_anh   @relation(fields: [hinh_id], references: [hinh_id], onDelete: NoAction, onUpdate: NoAction, map: "luu_anh_ibfk_2")
 
-  @@index([resID], map: "resID")
-  @@index([userID], map: "userID")
+  @@id([nguoi_dung_id, hinh_id])
+  @@index([hinh_id], map: "hinh_id")
 }
+model follow {
+  follower_id  Int
+  following_id Int
+  ngay_tao     DateTime @default(now())
 
-model orders {
-  id         Int       @id @default(autoincrement())
-  userID     Int?
-  foodID     Int?
-  amount     Int?
-  codes      String?   @db.VarChar(255)
-  arr_sub_id String?   @db.VarChar(255)
-  deletedBy  Int       @default(0)
-  isDeleted  Boolean   @default(false)
-  deletedAt  DateTime? @db.Timestamp(0)
-  createdAt  DateTime  @default(now()) @db.Timestamp(0)
-  updatedAt  DateTime  @default(now()) @db.Timestamp(0)
-  users      users?    @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "orders_ibfk_1")
-  foods      foods?    @relation(fields: [foodID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "orders_ibfk_2")
-
-  @@index([foodID], map: "foodID")
-  @@index([userID], map: "userID")
-}
-
-model rate_res {
-  id          Int          @id @default(autoincrement())
-  userID      Int?
-  resID       Int?
-  amount      Int?
-  date_rate   DateTime?    @db.DateTime(0)
-  deletedBy   Int          @default(0)
-  isDeleted   Boolean      @default(false)
-  deletedAt   DateTime?    @db.Timestamp(0)
-  createdAt   DateTime     @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime     @default(now()) @db.Timestamp(0)
-  contents    String?      @default("still dont have rate") @db.VarChar(255)
-  users       users?       @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_res_ibfk_1")
-  restaurants restaurants? @relation(fields: [resID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_res_ibfk_2")
-
-  @@index([resID], map: "resID")
-  @@index([userID], map: "userID")
-}
-
-model restaurants {
-  id           Int        @id @default(autoincrement())
-  res_name     String?    @db.VarChar(255)
-  imageUrl     String?    @db.VarChar(255)
-  descriptions String?    @default("still no information") @db.VarChar(255)
-  deletedBy    Int        @default(0)
-  isDeleted    Boolean    @default(false)
-  deletedAt    DateTime?  @db.Timestamp(0)
-  createdAt    DateTime   @default(now()) @db.Timestamp(0)
-  updatedAt    DateTime   @default(now()) @db.Timestamp(0)
-  like_res     like_res[]
-  rate_res     rate_res[]
-}
-
-model users {
-  id        Int        @id @default(autoincrement())
-  full_name String?    @db.VarChar(255)
-  email     String?    @db.VarChar(255)
-  passwords String?    @db.VarChar(255)
-  deletedBy Int        @default(0)
-  isDeleted Boolean    @default(false)
-  deletedAt DateTime?  @db.Timestamp(0)
-  createdAt DateTime   @default(now()) @db.Timestamp(0)
-  updatedAt DateTime   @default(now()) @db.Timestamp(0)
-  like_res  like_res[]
-  orders    orders[]
-  rate_res  rate_res[]
+  // Đặt khóa chính kép để một người không thể follow 1 người 2 lần
+  @@id([follower_id, following_id]) 
 }

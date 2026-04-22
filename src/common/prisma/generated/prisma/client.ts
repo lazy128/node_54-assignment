@@ -29,8 +29,8 @@ export * from "./enums.ts"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Food_subs
- * const food_subs = await prisma.food_subs.findMany()
+ * // Fetch zero or more Nguoi_dungs
+ * const nguoi_dungs = await prisma.nguoi_dung.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,42 +40,27 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model food_subs
+ * Model nguoi_dung
  * 
  */
-export type food_subs = Prisma.food_subsModel
+export type nguoi_dung = Prisma.nguoi_dungModel
 /**
- * Model food_types
+ * Model hinh_anh
  * 
  */
-export type food_types = Prisma.food_typesModel
+export type hinh_anh = Prisma.hinh_anhModel
 /**
- * Model foods
+ * Model binh_luan
  * 
  */
-export type foods = Prisma.foodsModel
+export type binh_luan = Prisma.binh_luanModel
 /**
- * Model like_res
+ * Model luu_anh
  * 
  */
-export type like_res = Prisma.like_resModel
+export type luu_anh = Prisma.luu_anhModel
 /**
- * Model orders
+ * Model follow
  * 
  */
-export type orders = Prisma.ordersModel
-/**
- * Model rate_res
- * 
- */
-export type rate_res = Prisma.rate_resModel
-/**
- * Model restaurants
- * 
- */
-export type restaurants = Prisma.restaurantsModel
-/**
- * Model users
- * 
- */
-export type users = Prisma.usersModel
+export type follow = Prisma.followModel

@@ -11,6 +11,12 @@ export const authController = {
    async login(req, res, next) {
       const result = await authService.login(req);
       const response = responseSuccess(result, `Login all auths successfully`);
-      res.status(response.statusCode).json(response);
+         res.status(response.statusCode).json(response);
    },
+   
+   // async getInfo(req, res, next) {
+   //    const result = await authService.getInfo(req);
+   //    const response = responseSuccess(result, `getInfo auth successfully`);
+   //    res.status(response.statusCode).json(response);
+   // },
 };

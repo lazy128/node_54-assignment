@@ -8,12 +8,9 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/food_subs.ts'
-export type * from './models/food_types.ts'
-export type * from './models/foods.ts'
-export type * from './models/like_res.ts'
-export type * from './models/orders.ts'
-export type * from './models/rate_res.ts'
-export type * from './models/restaurants.ts'
-export type * from './models/users.ts'
+export type * from './models/nguoi_dung.ts'
+export type * from './models/hinh_anh.ts'
+export type * from './models/binh_luan.ts'
+export type * from './models/luu_anh.ts'
+export type * from './models/follow.ts'
 export type * from './commonInputTypes.ts'

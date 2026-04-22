@@ -2,7 +2,7 @@ export const buildQueryPrisma = (req) => {
     let { page, pageSize, filters } = req.query;
 
     const pageDefault = 1;
-    const pageSizeDefault = 3;
+    const pageSizeDefault = 100;
 
     // ĐẢM BẢO LÀ SỐ
     page = Number(page);

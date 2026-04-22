@@ -51,14 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  food_subs: 'food_subs',
-  food_types: 'food_types',
-  foods: 'foods',
-  like_res: 'like_res',
-  orders: 'orders',
-  rate_res: 'rate_res',
-  restaurants: 'restaurants',
-  users: 'users'
+  nguoi_dung: 'nguoi_dung',
+  hinh_anh: 'hinh_anh',
+  binh_luan: 'binh_luan',
+  luu_anh: 'luu_anh',
+  follow: 'follow'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -77,121 +74,13 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const Food_subsScalarFieldEnum = {
-  id: 'id',
-  sub_name: 'sub_name',
-  sub_price: 'sub_price',
-  foodID: 'foodID',
-  deletedBy: 'deletedBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type Food_subsScalarFieldEnum = (typeof Food_subsScalarFieldEnum)[keyof typeof Food_subsScalarFieldEnum]
-
-
-export const Food_typesScalarFieldEnum = {
-  id: 'id',
-  types_name: 'types_name',
-  deletedBy: 'deletedBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type Food_typesScalarFieldEnum = (typeof Food_typesScalarFieldEnum)[keyof typeof Food_typesScalarFieldEnum]
-
-
-export const FoodsScalarFieldEnum = {
-  id: 'id',
-  food_name: 'food_name',
-  imageUrl: 'imageUrl',
-  price: 'price',
-  descriptions: 'descriptions',
-  deletedBy: 'deletedBy',
-  types_id: 'types_id',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type FoodsScalarFieldEnum = (typeof FoodsScalarFieldEnum)[keyof typeof FoodsScalarFieldEnum]
-
-
-export const Like_resScalarFieldEnum = {
-  id: 'id',
-  userID: 'userID',
-  resID: 'resID',
-  deletedBy: 'deletedBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isLike: 'isLike',
-  isDislike: 'isDislike'
-} as const
-
-export type Like_resScalarFieldEnum = (typeof Like_resScalarFieldEnum)[keyof typeof Like_resScalarFieldEnum]
-
-
-export const OrdersScalarFieldEnum = {
-  id: 'id',
-  userID: 'userID',
-  foodID: 'foodID',
-  amount: 'amount',
-  codes: 'codes',
-  arr_sub_id: 'arr_sub_id',
-  deletedBy: 'deletedBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type OrdersScalarFieldEnum = (typeof OrdersScalarFieldEnum)[keyof typeof OrdersScalarFieldEnum]
-
-
-export const Rate_resScalarFieldEnum = {
-  id: 'id',
-  userID: 'userID',
-  resID: 'resID',
-  amount: 'amount',
-  date_rate: 'date_rate',
-  deletedBy: 'deletedBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  contents: 'contents'
-} as const
-
-export type Rate_resScalarFieldEnum = (typeof Rate_resScalarFieldEnum)[keyof typeof Rate_resScalarFieldEnum]
-
-
-export const RestaurantsScalarFieldEnum = {
-  id: 'id',
-  res_name: 'res_name',
-  imageUrl: 'imageUrl',
-  descriptions: 'descriptions',
-  deletedBy: 'deletedBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type RestaurantsScalarFieldEnum = (typeof RestaurantsScalarFieldEnum)[keyof typeof RestaurantsScalarFieldEnum]
-
-
-export const UsersScalarFieldEnum = {
-  id: 'id',
-  full_name: 'full_name',
+export const Nguoi_dungScalarFieldEnum = {
+  nguoi_dung_id: 'nguoi_dung_id',
   email: 'email',
-  passwords: 'passwords',
+  mat_khau: 'mat_khau',
+  ho_ten: 'ho_ten',
+  tuoi: 'tuoi',
+  anh_dai_dien: 'anh_dai_dien',
   deletedBy: 'deletedBy',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
@@ -199,7 +88,58 @@ export const UsersScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+export type Nguoi_dungScalarFieldEnum = (typeof Nguoi_dungScalarFieldEnum)[keyof typeof Nguoi_dungScalarFieldEnum]
+
+
+export const Hinh_anhScalarFieldEnum = {
+  hinh_id: 'hinh_id',
+  ten_hinh: 'ten_hinh',
+  duong_dan: 'duong_dan',
+  mo_ta: 'mo_ta',
+  nguoi_dung_id: 'nguoi_dung_id',
+  deletedBy: 'deletedBy',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  cloudinary_public_id: 'cloudinary_public_id'
+} as const
+
+export type Hinh_anhScalarFieldEnum = (typeof Hinh_anhScalarFieldEnum)[keyof typeof Hinh_anhScalarFieldEnum]
+
+
+export const Binh_luanScalarFieldEnum = {
+  binh_luan_id: 'binh_luan_id',
+  nguoi_dung_id: 'nguoi_dung_id',
+  hinh_id: 'hinh_id',
+  noi_dung: 'noi_dung',
+  ngay_binh_luan: 'ngay_binh_luan',
+  deletedBy: 'deletedBy',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type Binh_luanScalarFieldEnum = (typeof Binh_luanScalarFieldEnum)[keyof typeof Binh_luanScalarFieldEnum]
+
+
+export const Luu_anhScalarFieldEnum = {
+  nguoi_dung_id: 'nguoi_dung_id',
+  hinh_id: 'hinh_id',
+  createdAt: 'createdAt'
+} as const
+
+export type Luu_anhScalarFieldEnum = (typeof Luu_anhScalarFieldEnum)[keyof typeof Luu_anhScalarFieldEnum]
+
+
+export const FollowScalarFieldEnum = {
+  follower_id: 'follower_id',
+  following_id: 'following_id',
+  ngay_tao: 'ngay_tao'
+} as const
+
+export type FollowScalarFieldEnum = (typeof FollowScalarFieldEnum)[keyof typeof FollowScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -218,58 +158,29 @@ export const NullsOrder = {
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
-export const food_subsOrderByRelevanceFieldEnum = {
-  sub_name: 'sub_name'
-} as const
-
-export type food_subsOrderByRelevanceFieldEnum = (typeof food_subsOrderByRelevanceFieldEnum)[keyof typeof food_subsOrderByRelevanceFieldEnum]
-
-
-export const food_typesOrderByRelevanceFieldEnum = {
-  types_name: 'types_name'
-} as const
-
-export type food_typesOrderByRelevanceFieldEnum = (typeof food_typesOrderByRelevanceFieldEnum)[keyof typeof food_typesOrderByRelevanceFieldEnum]
-
-
-export const foodsOrderByRelevanceFieldEnum = {
-  food_name: 'food_name',
-  imageUrl: 'imageUrl',
-  descriptions: 'descriptions'
-} as const
-
-export type foodsOrderByRelevanceFieldEnum = (typeof foodsOrderByRelevanceFieldEnum)[keyof typeof foodsOrderByRelevanceFieldEnum]
-
-
-export const ordersOrderByRelevanceFieldEnum = {
-  codes: 'codes',
-  arr_sub_id: 'arr_sub_id'
-} as const
-
-export type ordersOrderByRelevanceFieldEnum = (typeof ordersOrderByRelevanceFieldEnum)[keyof typeof ordersOrderByRelevanceFieldEnum]
-
-
-export const rate_resOrderByRelevanceFieldEnum = {
-  contents: 'contents'
-} as const
-
-export type rate_resOrderByRelevanceFieldEnum = (typeof rate_resOrderByRelevanceFieldEnum)[keyof typeof rate_resOrderByRelevanceFieldEnum]
-
-
-export const restaurantsOrderByRelevanceFieldEnum = {
-  res_name: 'res_name',
-  imageUrl: 'imageUrl',
-  descriptions: 'descriptions'
-} as const
-
-export type restaurantsOrderByRelevanceFieldEnum = (typeof restaurantsOrderByRelevanceFieldEnum)[keyof typeof restaurantsOrderByRelevanceFieldEnum]
-
-
-export const usersOrderByRelevanceFieldEnum = {
-  full_name: 'full_name',
+export const nguoi_dungOrderByRelevanceFieldEnum = {
   email: 'email',
-  passwords: 'passwords'
+  mat_khau: 'mat_khau',
+  ho_ten: 'ho_ten',
+  anh_dai_dien: 'anh_dai_dien'
 } as const
 
-export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
+export type nguoi_dungOrderByRelevanceFieldEnum = (typeof nguoi_dungOrderByRelevanceFieldEnum)[keyof typeof nguoi_dungOrderByRelevanceFieldEnum]
+
+
+export const hinh_anhOrderByRelevanceFieldEnum = {
+  ten_hinh: 'ten_hinh',
+  duong_dan: 'duong_dan',
+  mo_ta: 'mo_ta',
+  cloudinary_public_id: 'cloudinary_public_id'
+} as const
+
+export type hinh_anhOrderByRelevanceFieldEnum = (typeof hinh_anhOrderByRelevanceFieldEnum)[keyof typeof hinh_anhOrderByRelevanceFieldEnum]
+
+
+export const binh_luanOrderByRelevanceFieldEnum = {
+  noi_dung: 'noi_dung'
+} as const
+
+export type binh_luanOrderByRelevanceFieldEnum = (typeof binh_luanOrderByRelevanceFieldEnum)[keyof typeof binh_luanOrderByRelevanceFieldEnum]
 
