@@ -11,16 +11,11 @@ import { initSocket } from "./src/common/socket/init.socket.js";
 
 const app = express();
 
-// xử lý cors bằng cơm
-// app.use((req, res, next) => {
-//     console.log(req.headers);
-
-//     res.setHeader("access-control-allow-methods", "GET,HEAD,PUT,PATCH,DELETE,POST");
-//     res.setHeader("access-control-allow-headers", "content-type")
-//     res.setHeader("access-control-allow-origin", "*")
-//     next();
-// });
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:3000","https://my-picture-fe.vercel.app"],credentials: true}));
+// SỬA LỖI CORS Ở ĐÂY: Mở khóa hoàn toàn cho Vercel
+app.use(cors({ 
+    origin: true, 
+    credentials: true
+}));
 
 // để lấy được body (đảm bảo trước "/api")
 app.use(express.json());
@@ -39,7 +34,8 @@ app.use(appError);
 
 const httpServer = initSocket(app);
 
-const PORT = 3069;
+// SỬA LỖI SẬP SERVER RAILWAY Ở ĐÂY: Dùng biến môi trường PORT
+const PORT = process.env.PORT || 3069;
 const server = httpServer.listen(PORT, () => {
     console.log(`Server online at port: ${PORT}`);
 });
