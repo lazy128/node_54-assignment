@@ -11,45 +11,33 @@ import { initSocket } from "./src/common/socket/init.socket.js";
 
 const app = express();
 
-// SỬA LỖI CORS Ở ĐÂY: Mở khóa hoàn toàn cho Vercel
+// 1. CORS PHẢI ĐẶT ĐẦU TIÊN
 app.use(cors({ 
     origin: true, 
-    credentials: true
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"] // Thêm cái này cho chắc
 }));
 
-// để lấy được body (đảm bảo trước "/api")
+// 2. Xử lý body và cookie
 app.use(express.json());
-// để lấy được cookie (đảm bảo trước "/api")
 app.use(cookieParser());
+
+// 3. Log API nên đặt sau CORS để không chặn request pre-flight
 app.use(logApi("product"));
+
 initLoginGooglePassport();
 app.use(express.static("public"));
 
-// swwagger
-// http://localhost:3069/api-docs
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// Đảm bảo router không bị crash
 app.use("/api", rootRouter);
 app.use(appError);
 
 const httpServer = initSocket(app);
 
-// SỬA LỖI SẬP SERVER RAILWAY Ở ĐÂY: Dùng biến môi trường PORT
 const PORT = process.env.PORT || 3069;
 const server = httpServer.listen(PORT, () => {
     console.log(`Server online at port: ${PORT}`);
 });
 server.requestTimeout = 0;
-
-// js Version cũ: common-js
-// const express =  required("express")
-
-// ES6: phiên bản nâng cấp rất rất nhiều của js
-
-// js Version mới: es-module
-// import express from "express"
-
-// npx prisma db pull: kéo database vào code và tạo ra model
-// npx prisma generate: tạo ra object CLIENT để sử dụng trong code (để dev)
-
-// EXPRESSS verssion <5: phải bắt try/catch trong controller
