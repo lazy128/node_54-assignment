@@ -23,7 +23,13 @@ export const nguoiDungService = {
         const { nguoi_dung_id } = req.user;
         const { index, page, pageSize } = buildQueryPrisma(req);
 
-        const where = { nguoi_dung_id: +nguoi_dung_id };
+        // FIX LỖI 400: Chỉ lấy những record mà hình ảnh gốc chưa bị xóa (isDeleted: false)
+        const where = { 
+            nguoi_dung_id: +nguoi_dung_id,
+            hinh_anh: {
+                isDeleted: false
+            }
+        };
 
         const [resultPrisma, totalItem] = await Promise.all([
             prisma.luu_anh.findMany({
