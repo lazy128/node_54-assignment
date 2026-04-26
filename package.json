@@ -9,8 +9,9 @@
 "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1",
   "dev": "node server.js",
-  "start": "prisma generate && prisma migrate deploy && node server.js",
-  "prisma": "npx prisma db pull && npx prisma generate"
+  "start": "prisma migrate deploy && node server.js",
+  "prisma": "npx prisma db pull && npx prisma generate",
+  "postinstall": "prisma generate"
 },
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.4.1",
